@@ -8,16 +8,16 @@ import java.sql.SQLException;
 import dto.UserDTO;
 
 public class UserDAO {
-	Connection conn = null; // DB¿¬°áÀ» À§ÇÑ °´Ã¼
-	PreparedStatement pstm = null; // DB¿¡ sql¹®À» Àü´ŞÇÏ±â À§ÇÑ °´Ã¼
+	Connection conn = null; // DBì—°ê²°ì„ ìœ„í•œ ê°ì²´
+	PreparedStatement pstm = null; // DBì— sqlë¬¸ì„ ì „ë‹¬í•˜ê¸° ìœ„í•œ ê°ì²´
 	private static int KEY = 4;
 	ResultSet rs = null;
 
 	public UserDAO() {
-		conn = DBConnection.getConnection(); // UserDAOÀ» »ı¼ºÇÏ¸é DB¿¬°áÀ» ÇÏµµ·Ï ÇÑ´Ù.
+		conn = DBConnection.getConnection(); // UserDAOì„ ìƒì„±í•˜ë©´ DBì—°ê²°ì„ í•˜ë„ë¡ í•œë‹¤.
 	}
 
-	// ---------------------¾ÆÀÌµğ Áßº¹ Ã¼Å©------------------------------
+	// ---------------------ì•„ì´ë”” ì¤‘ë³µ ì²´í¬------------------------------
 	public boolean checkDup(String userId) {
 		String sql = "SELECT COUNT(*) FROM TBL_MEMBER WHERE USERID=?";
 		int result = 0;
@@ -29,29 +29,29 @@ public class UserDAO {
 				result = rs.getInt(1);
 			}
 		} catch (SQLException e) {
-			System.out.println("Áßº¹°ªÀ» Á¶È¸ÇÒ ¼ö ¾ø½À´Ï´Ù.");
+			System.out.println("ì¤‘ë³µê°’ì„ ì¡°íšŒí•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.");
 		} finally {
 			try {
 				rs.close();
 				pstm.close();
 			} catch (SQLException e) {
-				System.out.println("¿À·ù ¹ß»ı");
+				System.out.println("ì˜¤ë¥˜ ë°œìƒ");
 			}
 		}
-		return result == 0; // result¿¡ 1ÀÌ ´ã±âÁö ¾Ê¾Ò´Ù´Â °ÍÀº Áßº¹µÈ ¾ÆÀÌµğ¸¦ Ã£À» ¼ö ¾ø´Ù´Â °ÍÀÌ´Ù.
+		return result == 0; // resultì— 1ì´ ë‹´ê¸°ì§€ ì•Šì•˜ë‹¤ëŠ” ê²ƒì€ ì¤‘ë³µëœ ì•„ì´ë””ë¥¼ ì°¾ì„ ìˆ˜ ì—†ë‹¤ëŠ” ê²ƒì´ë‹¤.
 	}
 
-	// ---------------------È¸¿ø°¡ÀÔ------------------------------
+	// ---------------------íšŒì›ê°€ì…------------------------------
 	public int join(UserDTO newUser) {
 		String sql = "INSERT INTO TBL_MEMBER VALUES(SEQ_USER.NEXTVAL,?,?,?,?,?,?)";
 		int check = 0;
 		if (newUser.getUserPw().length() < 8) {
-			// ºñ¹Ğ¹øÈ£ ±æÀÌ Á¦ÇÑÀ» °Ë»çÇÕ´Ï´Ù.
+			// ë¹„ë°€ë²ˆí˜¸ ê¸¸ì´ ì œí•œì„ ê²€ì‚¬í•©ë‹ˆë‹¤.
 			return -1;
 		} else {
-			// È¸¿ø°¡ÀÔ °¡´ÉÇÑ »óÅÂÀÌ¹Ç·Î ¾Æ·¡ ÄÚµå¸¦ ÁøÇàÇÕ´Ï´Ù.
+			// íšŒì›ê°€ì… ê°€ëŠ¥í•œ ìƒíƒœì´ë¯€ë¡œ ì•„ë˜ ì½”ë“œë¥¼ ì§„í–‰í•©ë‹ˆë‹¤.
 			String en_pw = encrypt(newUser.getUserPw());
-			newUser.setUserPw(en_pw); // ºñ¹Ğ¹øÈ£ ¾ÏÈ£È­ÇÑ °ªÀ¸·Î ¸¸µé±â
+			newUser.setUserPw(en_pw); // ë¹„ë°€ë²ˆí˜¸ ì•”í˜¸í™”í•œ ê°’ìœ¼ë¡œ ë§Œë“¤ê¸°
 			try {
 				pstm = conn.prepareStatement(sql);
 				pstm.setString(1, newUser.getUserId());
@@ -67,7 +67,7 @@ public class UserDAO {
 				try {
 					pstm.close();
 				} catch (SQLException e) {
-					System.out.println("¿À·ù ¹ß»ı");
+					System.out.println("ì˜¤ë¥˜ ë°œìƒ");
 				}
 			}
 			return check;
@@ -90,7 +90,7 @@ public class UserDAO {
 		return de_pw;
 	}
 
-	// ---------------------·Î±×ÀÎ------------------------
+	// ---------------------ë¡œê·¸ì¸------------------------
 	public UserDTO login(String userId, String userPw) {
 		String sql = "SELECT * FROM TBL_MEMBER WHERE USERID = ? AND USERPW = ?";
 		UserDTO loginUser = null;
@@ -110,13 +110,13 @@ public class UserDAO {
 				rs.close();
 				pstm.close();
 			} catch (SQLException e) {
-				System.out.println("¿À·ù ¹ß»ı");
+				System.out.println("ì˜¤ë¥˜ ë°œìƒ");
 			}
 		}
 		return loginUser;
 	}
 
-	// -----------------¼öÁ¤ÇÏ±â---------------------
+	// -----------------ìˆ˜ì •í•˜ê¸°---------------------
 	public void modify(int idx, String newData, String userId) {
 		String[] columns = { "userPw", "userAddr" };
 		String sql = "UPDATE TBL_MEMBER SET " + columns[idx] + "= ? WHERE userId = ?";
@@ -132,12 +132,12 @@ public class UserDAO {
 			try {
 				pstm.close();
 			} catch (SQLException e) {
-				System.out.println("¿À·ù ¹ß»ı");
+				System.out.println("ì˜¤ë¥˜ ë°œìƒ");
 			}
 		}
 	}
 
-	// ----------------ÀÜ¾× È®ÀÎÇÏ±â----------------------
+	// ----------------ì”ì•¡ í™•ì¸í•˜ê¸°----------------------
 	public int check(String userId) {
 		String sql = "SELECT USERPOINT FROM TBL_MEMBER WHERE USERID = ?";
 		int result = 0;
@@ -154,13 +154,13 @@ public class UserDAO {
 			try {
 				pstm.close();
 			} catch (SQLException e) {
-				System.out.println("¿À·ù ¹ß»ı");
+				System.out.println("ì˜¤ë¥˜ ë°œìƒ");
 			}
 		}
 		return result;
 	}
 
-	// -----------------ÃæÀüÇÏ±â---------------------------
+	// -----------------ì¶©ì „í•˜ê¸°---------------------------
 	public int charge(int point, String userId) {
 		String sql = "UPDATE TBL_MEMBER SET USERPOINT = USERPOINT + ? WHERE USERID = ?";
 		int result = 0;
@@ -172,13 +172,13 @@ public class UserDAO {
 			result = pstm.executeUpdate();
 
 		} catch (SQLException e) {
-			System.out.println("¾Ë ¼ö ¾ø´Â ¿À·ù.charge");
+			System.out.println("ì•Œ ìˆ˜ ì—†ëŠ” ì˜¤ë¥˜.charge");
 			e.printStackTrace();
 		} finally {
 			try {
 				pstm.close();
 			} catch (SQLException e) {
-				System.out.println("¾Ë ¼ö ¾ø´Â ¿À·ù.charge");
+				System.out.println("ì•Œ ìˆ˜ ì—†ëŠ” ì˜¤ë¥˜.charge");
 				e.printStackTrace();
 			}
 		}
@@ -186,9 +186,9 @@ public class UserDAO {
 		return result;
 	}
 
-	// ------------------»èÁ¦-------------------------
+	// ------------------ì‚­ì œ-------------------------
 	public boolean leaveId(String userPw, String userId) {
-		// ºñ¹Ğ¹øÈ£ °Ë»ç ¸ÕÀú
+		// ë¹„ë°€ë²ˆí˜¸ ê²€ì‚¬ ë¨¼ì €
 		String sql = "SELECT USERPW FROM TBL_MEMBER WHERE USERID = ?";
 		String en_pw = "";
 		try {
@@ -199,18 +199,18 @@ public class UserDAO {
 				en_pw = rs.getString(1);
 			}
 		} catch (SQLException e) {
-			System.out.println("¾Ë ¼ö ¾ø´Â ¿À·ù.leaveId");
+			System.out.println("ì•Œ ìˆ˜ ì—†ëŠ” ì˜¤ë¥˜.leaveId");
 			e.printStackTrace();
 		} finally {
 			try {
 				rs.close();
 				pstm.close();
 			} catch (SQLException e) {
-				System.out.println("¾Ë ¼ö ¾ø´Â ¿À·ù.leaveId");
+				System.out.println("ì•Œ ìˆ˜ ì—†ëŠ” ì˜¤ë¥˜.leaveId");
 				e.printStackTrace();
 			}
 		}
-		// ºñ¹Ğ¹øÈ£°¡ ¸ÂÀ¸¸é, °èÁ¤ »èÁ¦ ÁøÇà
+		// ë¹„ë°€ë²ˆí˜¸ê°€ ë§ìœ¼ë©´, ê³„ì • ì‚­ì œ ì§„í–‰
 		if (userPw.equals(decrypt(en_pw))) {
 			String user_sql = "DELETE FROM TBL_MEMBER WHERE USERID = ?";
 			String orderList_sql = "DELETE FROM TBL_ORDERLIST WHERE USERID = ?";

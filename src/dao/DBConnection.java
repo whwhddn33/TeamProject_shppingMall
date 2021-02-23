@@ -5,29 +5,29 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DBConnection {
-	// DB¿¡ ¿¬°áÇÏ±â À§ÇÑ Á¤º¸µé(ÀÎÅÍÆäÀÌ½º,Å¬·¡½º,°èÁ¤Á¤º¸)
+	// DBì— ì—°ê²°í•˜ê¸° ìœ„í•œ ì •ë³´ë“¤(ì¸í„°í˜ì´ìŠ¤,í´ë˜ìŠ¤,ê³„ì •ì •ë³´)
 	public static Connection conn = null;
 	public static String driver = "oracle.jdbc.driver.OracleDriver";
 	public static String url = "jdbc:oracle:thin:@localhost:1521:xe";
 	public static String user = "web";
 	public static String password = "web";
 
-	// ±âº»»ı¼ºÀÚ
+	// ê¸°ë³¸ìƒì„±ì
 	public DBConnection() {
 	}
 
-	// ½ÇÁúÀûÀ¸·Î DB¿¬°áÀ» ½ÇÇàÇÏ´Â ¸Ş¼Òµå
+	// ì‹¤ì§ˆì ìœ¼ë¡œ DBì—°ê²°ì„ ì‹¤í–‰í•˜ëŠ” ë©”ì†Œë“œ
 	public static Connection getConnection() {
 		if (conn == null) {
 			try {
-				Class.forName(driver); // driver¶õ ÀÌ¸§(º¯¼ö)·Î Å¬·¡½º¸¦ ºÒ·¯¿À´Â°Í
-				System.out.println("jdbc driver ·Îµù ¼º°ø");
+				Class.forName(driver); // driverë€ ì´ë¦„(ë³€ìˆ˜)ë¡œ í´ë˜ìŠ¤ë¥¼ ë¶ˆëŸ¬ì˜¤ëŠ”ê²ƒ
+				System.out.println("jdbc driver ë¡œë”© ì„±ê³µ");
 				conn = DriverManager.getConnection(url, user, password);
-				System.out.println("¿À¶óÅ¬ ¿¬°á ¼º°ø");
+				System.out.println("ì˜¤ë¼í´ ì—°ê²° ì„±ê³µ");
 			} catch (ClassNotFoundException e) {
-				System.out.println("jdbc driver ·Îµù ½ÇÆĞ");
+				System.out.println("jdbc driver ë¡œë”© ì‹¤íŒ¨");
 			} catch (SQLException sqle) {
-				System.out.println("¿À¶óÅ¬ ¿¬°á ½ÇÆĞ");
+				System.out.println("ì˜¤ë¼í´ ì—°ê²° ì‹¤íŒ¨");
 			}
 		}
 		return conn;

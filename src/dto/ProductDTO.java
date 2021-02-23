@@ -1,14 +1,14 @@
 package dto;
 
 public class ProductDTO {
-	private int prodIdx; // »óÇ° °íÀ¯ ¹øÈ£(PK)
-	private String prodDate; // »óÇ°µî·ÏÀÏÀÚ
-	private String prodName; // ÀÌ¸§
-	private String prodDes; // ¼³¸í
-	private int prodPrice; // °¡°İ
-	private int prodLike; // ÁÁ¾Æ¿ä¼ö
-	private int prodAmount; // Àç°í¼ö·®
-	private String prodState; // ±¸¸Å °¡´É »óÅÂ
+	private int prodIdx; // ìƒí’ˆ ê³ ìœ  ë²ˆí˜¸(PK)
+	private String prodDate; // ìƒí’ˆë“±ë¡ì¼ì
+	private String prodName; // ì´ë¦„
+	private String prodDes; // ì„¤ëª…
+	private int prodPrice; // ê°€ê²©
+	private int prodLike; // ì¢‹ì•„ìš”ìˆ˜
+	private int prodAmount; // ì¬ê³ ìˆ˜ëŸ‰
+	private String prodState; // êµ¬ë§¤ ê°€ëŠ¥ ìƒíƒœ
 
 	public ProductDTO() {
 		;

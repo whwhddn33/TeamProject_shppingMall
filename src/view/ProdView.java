@@ -15,43 +15,43 @@ public class ProdView {
 	Scanner sc = new Scanner(System.in);
 
 	public ProdView() {
-		String prodList = pdao.prodList();// »óÇ°Á¤º¸µéÀ» ¸ğµÎ °¡Á®¿Í prodListº¯¼ö¿¡ ¿Å°Ü ´ã½À´Ï´Ù.
+		String prodList = pdao.prodList();// ìƒí’ˆì •ë³´ë“¤ì„ ëª¨ë‘ ê°€ì ¸ì™€ prodListë³€ìˆ˜ì— ì˜®ê²¨ ë‹´ìŠµë‹ˆë‹¤.
 		if (prodList != null) {
 			System.out.println(prodList);
-			System.out.println("»óÇ°À» ¼±ÅÃÇÏ¿© [ÁÖ¹®ÇÏ±â/Àå¹Ù±¸´Ï/ÁÁ¾Æ¿ä] ±â´ÉÀ» ÀÌ¿ëÇÏ¼¼¿ä! (µ¹¾Æ°¡±â:4) ");
+			System.out.println("ìƒí’ˆì„ ì„ íƒí•˜ì—¬ [ì£¼ë¬¸í•˜ê¸°/ì¥ë°”êµ¬ë‹ˆ/ì¢‹ì•„ìš”] ê¸°ëŠ¥ì„ ì´ìš©í•˜ì„¸ìš”! (ëŒì•„ê°€ê¸°:4) ");
 			int selectProdNum = sc.nextInt();
 			if (selectProdNum == 4) {
 				;
 			} else {
 				if (Session.get("session_id") != null) {
-					System.out.println("1. ÁÖ¹®ÇÏ±â \n2. Àå¹Ù±¸´Ï \n3. ÁÁ¾Æ¿ä");
+					System.out.println("1. ì£¼ë¬¸í•˜ê¸° \n2. ì¥ë°”êµ¬ë‹ˆ \n3. ì¢‹ì•„ìš”");
 					int choice = sc.nextInt();
 					switch (choice) {
 					case 1:
-						//ÁÖ¹®ÇÏ±â ¿µ¿ª
+						//ì£¼ë¬¸í•˜ê¸° ì˜ì—­
 						if (!pdao.checkProdAmount(selectProdNum)) {
-							// ÁÖ¹®À» °¡´É ¿©ºÎ¸¦ Á¡°ËÇÏ±â À§ÇØ ÇØ´ç Á¦Ç°ÀÇ °íÀ¯¹øÈ£(»óÇ°¹øÈ£)¸¦ ¸Ş¼Òµå¿¡ ³Ñ°ÜÁİ´Ï´Ù.
+							// ì£¼ë¬¸ì„ ê°€ëŠ¥ ì—¬ë¶€ë¥¼ ì ê²€í•˜ê¸° ìœ„í•´ í•´ë‹¹ ì œí’ˆì˜ ê³ ìœ ë²ˆí˜¸(ìƒí’ˆë²ˆí˜¸)ë¥¼ ë©”ì†Œë“œì— ë„˜ê²¨ì¤ë‹ˆë‹¤.
 							pdao.order(Session.get("session_id"), selectProdNum);
 						} else {
-							System.out.println("Àç°í ¼ö·®ÀÌ ¾ø½À´Ï´Ù.");
+							System.out.println("ì¬ê³  ìˆ˜ëŸ‰ì´ ì—†ìŠµë‹ˆë‹¤.");
 						}
 						break;
 					case 2:
-						//Àå¹Ù±¸´Ï ¿µ¿ª
+						//ì¥ë°”êµ¬ë‹ˆ ì˜ì—­
 						pdao.addBasket(Session.get("session_id"), selectProdNum);
 						break;
 					case 3:
-						//ÁÁ¾Æ¿ä ¿µ¿ª
+						//ì¢‹ì•„ìš” ì˜ì—­
 						int likeResult = pdao.likeAdd(selectProdNum);
 						if (likeResult != 0) {
-							System.out.println("ÁÁ¾Æ¿ä +1");
+							System.out.println("ì¢‹ì•„ìš” +1");
 						} else {
-							System.out.println("½ÇÆĞ. ´Ù½Ã ½ÃµµÇÏ¼¼¿ä");
+							System.out.println("ì‹¤íŒ¨. ë‹¤ì‹œ ì‹œë„í•˜ì„¸ìš”");
 						}
 						break;
 					}
 				} else {
-					System.out.println("·Î±×ÀÎÀ» ÇØÁÖ¼¼¿ä.");
+					System.out.println("ë¡œê·¸ì¸ì„ í•´ì£¼ì„¸ìš”.");
 				}
 			}
 		}

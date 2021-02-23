@@ -20,7 +20,7 @@ public class MyInfoView {
 		while (true) {
 			if (Session.get("session_id") != null) {
 				System.out.println(
-						"1. ÃæÀü±İ¾× º¸±â\n2. ÃæÀüÇÏ±â \n3. ºñ¹Ğ¹øÈ£ ¼öÁ¤ÇÏ±â \n4. ÁÖ¼Ò ¼öÁ¤ÇÏ±â \n5. ÁÖ¹®³»¿ª º¸±â \n6. Àå¹Ù±¸´Ï º¸±â\n7. È¸¿øÅ»Åğ\n8. ¸ŞÀÎÀ¸·Î µ¹¾Æ°¡±â");
+						"1. ì¶©ì „ê¸ˆì•¡ ë³´ê¸°\n2. ì¶©ì „í•˜ê¸° \n3. ë¹„ë°€ë²ˆí˜¸ ìˆ˜ì •í•˜ê¸° \n4. ì£¼ì†Œ ìˆ˜ì •í•˜ê¸° \n5. ì£¼ë¬¸ë‚´ì—­ ë³´ê¸° \n6. ì¥ë°”êµ¬ë‹ˆ ë³´ê¸°\n7. íšŒì›íƒˆí‡´\n8. ë©”ì¸ìœ¼ë¡œ ëŒì•„ê°€ê¸°");
 				int choice = sc.nextInt();
 				if (choice == 8) {
 					break;
@@ -28,43 +28,43 @@ public class MyInfoView {
 				switch (choice) {
 				case 1:
 					int checkPoint = udao.check(Session.get("session_id"));
-					System.out.println("ÇöÀç º¸À¯ ÀÜ¾× : " + checkPoint + "¿ø");
+					System.out.println("í˜„ì¬ ë³´ìœ  ì”ì•¡ : " + checkPoint + "ì›");
 					break;
 				case 2:
-					System.out.print("ÃæÀü ±İ¾× : ");
+					System.out.print("ì¶©ì „ ê¸ˆì•¡ : ");
 					int chargePoint = sc.nextInt();
 					if (udao.charge(chargePoint, Session.get("session_id")) != 0) {
-						System.out.println("ÃæÀüÀ» ¿Ï·áÇÏ¿´½À´Ï´Ù.");
+						System.out.println("ì¶©ì „ì„ ì™„ë£Œí•˜ì˜€ìŠµë‹ˆë‹¤.");
 					} else {
-						System.out.println("½ÇÆĞ. ´Ù½Ã ½ÃµµÇÏ¼¼¿ä.");
+						System.out.println("ì‹¤íŒ¨. ë‹¤ì‹œ ì‹œë„í•˜ì„¸ìš”.");
 					}
 					break;
 				case 3:
-					System.out.print("»õ·Î¿î ºñ¹Ğ¹øÈ£¸¦ ÀÔ·ÂÇÏ¼¼¿ä : ");
+					System.out.print("ìƒˆë¡œìš´ ë¹„ë°€ë²ˆí˜¸ë¥¼ ì…ë ¥í•˜ì„¸ìš” : ");
 					String newPw = sc.next();
 					udao.modify(0, udao.encrypt(newPw), Session.get("session_id"));
-					System.out.println("¼öÁ¤À» ¿Ï·áÇÏ¿´½À´Ï´Ù.");
+					System.out.println("ìˆ˜ì •ì„ ì™„ë£Œí•˜ì˜€ìŠµë‹ˆë‹¤.");
 					break;
 				case 4:
-					System.out.print("»õ·Î¿î ÁÖ¼Ò¸¦ ÀÔ·ÂÇÏ¼¼¿ä : ");
+					System.out.print("ìƒˆë¡œìš´ ì£¼ì†Œë¥¼ ì…ë ¥í•˜ì„¸ìš” : ");
 					String newAddr = sc.next();
 					udao.modify(1, newAddr, Session.get("session_id"));
-					System.out.println("¼öÁ¤À» ¿Ï·áÇÏ¿´½À´Ï´Ù.");
+					System.out.println("ìˆ˜ì •ì„ ì™„ë£Œí•˜ì˜€ìŠµë‹ˆë‹¤.");
 					break;
 				case 5:
 					pdao.showOrderList(Session.get("session_id"));
 					break;
 					
-				case 6:// Àå¹Ù±¸´Ï¸ñ·Ïº¸±â, ÁÖ¹®
+				case 6:// ì¥ë°”êµ¬ë‹ˆëª©ë¡ë³´ê¸°, ì£¼ë¬¸
 					int basketListProdidx = 0;
 					for (BasketDTO i : pdao.showBasketList(Session.get("session_id"))) {
 						System.out.println(i);
 					}
-					System.out.println("1.Àå¹Ù±¸´Ï¿¡¼­ ÁÖ¹®ÇÏ±â, 2.³ª°¡±â");
+					System.out.println("1.ì¥ë°”êµ¬ë‹ˆì—ì„œ ì£¼ë¬¸í•˜ê¸°, 2.ë‚˜ê°€ê¸°");
 					int choiceOrderOrBreak = sc.nextInt();
 					while(true) {
 						if (choiceOrderOrBreak==1) {
-							System.out.println("ÁÖ¹®ÇÒ Àå¹Ù±¸´Ï¹øÈ£¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä.");
+							System.out.println("ì£¼ë¬¸í•  ì¥ë°”êµ¬ë‹ˆë²ˆí˜¸ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”.");
 							int choiceBasketlist = sc.nextInt();
 							for (BasketDTO i : pdao.showBasketList(Session.get("session_id"))) {
 								if (i.getBasketIdx() == choiceBasketlist) {
@@ -78,23 +78,23 @@ public class MyInfoView {
 						}else if (choiceOrderOrBreak==2) {
 							break;
 						}else {
-							System.out.println("ÀÔ·ÂÀÌ Àß¸øµÇ¾ú½À´Ï´Ù.");
+							System.out.println("ì…ë ¥ì´ ì˜ëª»ë˜ì—ˆìŠµë‹ˆë‹¤.");
 						}
 					}
 					break;
 				case 7:
-					System.out.println("Á¤¸» Å»ÅğÇÏ½Ã°Ú½À´Ï±î? \n1. ³×\n2. ¾Æ´Ï¿ä");
+					System.out.println("ì •ë§ íƒˆí‡´í•˜ì‹œê² ìŠµë‹ˆê¹Œ? \n1. ë„¤\n2. ì•„ë‹ˆìš”");
 					int finalChoice = sc.nextInt();
 
 					switch (finalChoice) {
 					case 1:
-						System.out.print("ºñ¹Ğ¹øÈ£¸¦ ÀÔ·ÂÇÏ¼¼¿ä : ");
+						System.out.print("ë¹„ë°€ë²ˆí˜¸ë¥¼ ì…ë ¥í•˜ì„¸ìš” : ");
 						String checkPw = sc.next();
 						if (udao.leaveId(checkPw, Session.get("session_id"))) {
 							Session.put("session_id", null);
-							System.out.println("ÀÌ¿ëÇØ ÁÖ¼Å¼­ °¨»çÇÕ´Ï´Ù.");
+							System.out.println("ì´ìš©í•´ ì£¼ì…”ì„œ ê°ì‚¬í•©ë‹ˆë‹¤.");
 						} else {
-							System.out.println("ºñ¹Ğ¹øÈ£°¡ Àß¸øµÇ¾ú½À´Ï´Ù. ´Ù½Ã ½ÃµµÇØÁÖ¼¼¿ä.");
+							System.out.println("ë¹„ë°€ë²ˆí˜¸ê°€ ì˜ëª»ë˜ì—ˆìŠµë‹ˆë‹¤. ë‹¤ì‹œ ì‹œë„í•´ì£¼ì„¸ìš”.");
 						}
 						break;
 					case 2:

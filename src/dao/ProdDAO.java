@@ -22,33 +22,33 @@ public class ProdDAO {
 		conn = DBConnection.getConnection();
 	}
 
-	// -------------------------»óÇ°¸ñ·Ïº¸±â---------------------------
+	// -------------------------ìƒí’ˆëª©ë¡ë³´ê¸°---------------------------
 	public String prodList() {
-		String sql = "SELECT * FROM TBL_PRODUCT ORDER BY PRODIDX"; // »óÇ°¸ñ·ÏÀ» °íÀ¯¹øÈ£ ¼øÀ¸·Î ¾ò¾î¿À´Â Äõ¸®¹®ÀÔ´Ï´Ù.
+		String sql = "SELECT * FROM TBL_PRODUCT ORDER BY PRODIDX"; // ìƒí’ˆëª©ë¡ì„ ê³ ìœ ë²ˆí˜¸ ìˆœìœ¼ë¡œ ì–»ì–´ì˜¤ëŠ” ì¿¼ë¦¬ë¬¸ì…ë‹ˆë‹¤.
 		String result = "";
 		try {
 			pstm = conn.prepareStatement(sql);
-			rs = pstm.executeQuery(); // ºÒ·¯¿Ã »óÇ°¸ñ·ÏÀÌ ÀÖ´Ù¸é 1ÀÌ ºÎ¿©µË´Ï´Ù.
-			while (rs.next()) { // rs°¡ 1ÀÌ¶ó¸é º¯¼öresult¿¡ »óÇ° Á¤º¸¸¦ ¾Æ·¡Çü½Ä¿¡ ¸ÂÃß¾î ´ã½¿´Ï´Ù.
-				result += "\n" + rs.getInt(1) + " - »óÇ°¸í : " + rs.getString(3) + " / »óÇ°¼³¸í : " + rs.getString(4)
-						+ " / °¡°İ : " + rs.getInt(5) + "¿ø / " + rs.getInt(6) + "ÁÁ¾Æ¿ä ";
+			rs = pstm.executeQuery(); // ë¶ˆëŸ¬ì˜¬ ìƒí’ˆëª©ë¡ì´ ìˆë‹¤ë©´ 1ì´ ë¶€ì—¬ë©ë‹ˆë‹¤.
+			while (rs.next()) { // rsê°€ 1ì´ë¼ë©´ ë³€ìˆ˜resultì— ìƒí’ˆ ì •ë³´ë¥¼ ì•„ë˜í˜•ì‹ì— ë§ì¶”ì–´ ë‹´ìŠ´ë‹ˆë‹¤.
+				result += "\n" + rs.getInt(1) + " - ìƒí’ˆëª… : " + rs.getString(3) + " / ìƒí’ˆì„¤ëª… : " + rs.getString(4)
+						+ " / ê°€ê²© : " + rs.getInt(5) + "ì› / " + rs.getInt(6) + "ì¢‹ì•„ìš” ";
 			}
 		} catch (SQLException e) {
-			System.out.println("¾Ë ¼ö ¾ø´Â ¿À·ù.prodlist");
+			System.out.println("ì•Œ ìˆ˜ ì—†ëŠ” ì˜¤ë¥˜.prodlist");
 			e.printStackTrace();
 		} finally {
 			try {
 				pstm.close();
 				rs.close();
 			} catch (SQLException e) {
-				System.out.println("¾Ë ¼ö ¾ø´Â ¿À·ù.prodpstm,rs");
+				System.out.println("ì•Œ ìˆ˜ ì—†ëŠ” ì˜¤ë¥˜.prodpstm,rs");
 				e.printStackTrace();
 			}
 		}
 		return result;
 	}
 
-	// -------------------------Àç°í È®ÀÎ(»óÇ° ÁÖ¹® °¡´É¿©ºÎ)---------------------------
+	// -------------------------ì¬ê³  í™•ì¸(ìƒí’ˆ ì£¼ë¬¸ ê°€ëŠ¥ì—¬ë¶€)---------------------------
 	public boolean checkProdAmount(int selectProdNum) {
 		String sql = "SELECT PRODAMOUNT FROM TBL_PRODUCT WHERE PRODIDX=? ";
 		int checkAmount = 0;
@@ -61,7 +61,7 @@ public class ProdDAO {
 			if (rs.next()) {
 				checkAmount = rs.getInt(1);
 			} else {
-				System.out.println("»óÇ° ¹øÈ£¸¦ ´Ù½Ã ÀÔ·ÂÇÏ¼¼¿ä"); // º¸Åë guiÇüÅÂÀÇ view¿¡¼­ ¹Ş´Â °ªÀÌ´Ù. ÇÏÁö¸¸ ÄÜ¼ÖÈ¯°æÀÌ¹Ç·Î ¿©±â¼­ Ã³¸®!
+				System.out.println("ìƒí’ˆ ë²ˆí˜¸ë¥¼ ë‹¤ì‹œ ì…ë ¥í•˜ì„¸ìš”"); // ë³´í†µ guií˜•íƒœì˜ viewì—ì„œ ë°›ëŠ” ê°’ì´ë‹¤. í•˜ì§€ë§Œ ì½˜ì†”í™˜ê²½ì´ë¯€ë¡œ ì—¬ê¸°ì„œ ì²˜ë¦¬!
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -75,7 +75,7 @@ public class ProdDAO {
 		return checkAmount == 0;
 	}
 
-	// -------------------------ÁÖ¹®ÇÏ±â---------------------------
+	// -------------------------ì£¼ë¬¸í•˜ê¸°---------------------------
 	public void order(String userId, int selectProdNum) {
 		String user_sql = "SELECT USERPOINT FROM TBL_MEMBER WHERE USERID = ?";
 		String prod_sql = "SELECT PRODPRICE, PRODAMOUNT FROM TBL_PRODUCT WHERE PRODIDX = ?";
@@ -86,26 +86,26 @@ public class ProdDAO {
 		int userPoint = 0;
 		int prodPrice = 0;
 		int prodAmount = 0;
-		System.out.println("¡Ú " + selectProdNum + "¹ø »óÇ° ¼±ÅÃ ¡Ú");
+		System.out.println("â˜… " + selectProdNum + "ë²ˆ ìƒí’ˆ ì„ íƒ â˜…");
 
 		try {
-			// ----------·Î±×ÀÎ À¯ÀúÀÇ ÀÜ¾× Á¶È¸ÇÏ±â
+			// ----------ë¡œê·¸ì¸ ìœ ì €ì˜ ì”ì•¡ ì¡°íšŒí•˜ê¸°
 			pstm = conn.prepareStatement(user_sql);
 			pstm.setString(1, userId);
 			rs = pstm.executeQuery();
 			if (rs.next()) {
 				userPoint = rs.getInt(1);
 			}
-			System.out.println("¢Ñ  ³» Æ÷ÀÎÆ® : " + userPoint);
-			// ----------¼±ÅÃÇÑ »óÇ°ÀÇ °¡°İ°ú ¼ö·® Á¶È¸ÇÏ±â
+			System.out.println("â˜  ë‚´ í¬ì¸íŠ¸ : " + userPoint);
+			// ----------ì„ íƒí•œ ìƒí’ˆì˜ ê°€ê²©ê³¼ ìˆ˜ëŸ‰ ì¡°íšŒí•˜ê¸°
 			pstm = conn.prepareStatement(prod_sql);
 			pstm.setInt(1, Integer.valueOf(selectProdNum));
 			rs = pstm.executeQuery();
 			if (rs.next()) {
 				prodPrice = rs.getInt(1);
-				System.out.println("¢Ñ  »óÇ°°¡°İ : " + prodPrice + "¿ø");
+				System.out.println("â˜  ìƒí’ˆê°€ê²© : " + prodPrice + "ì›");
 				prodAmount = rs.getInt(2);
-				// -----------À¯ÀúÀÇ ÀÜ¾×ÀÌ »óÇ°±İ¾×º¸´Ù ¸¹´Ù¸é ÁÖ¹®°¡´É(À¯ÀúÆ÷ÀÎÆ®¿Í »óÇ°¼ö·® ¼öÁ¤)
+				// -----------ìœ ì €ì˜ ì”ì•¡ì´ ìƒí’ˆê¸ˆì•¡ë³´ë‹¤ ë§ë‹¤ë©´ ì£¼ë¬¸ê°€ëŠ¥(ìœ ì €í¬ì¸íŠ¸ì™€ ìƒí’ˆìˆ˜ëŸ‰ ìˆ˜ì •)
 				if (userPoint >= prodPrice) {
 					userPoint -= prodPrice;
 					pstm = conn.prepareStatement(updateUserPoint_sql);
@@ -119,16 +119,16 @@ public class ProdDAO {
 					pstm.setInt(2, selectProdNum);
 					pstm.executeUpdate();
 
-					System.out.println("¢¾¢¾¢¾ ÁÖ¹®À» ¿Ï·áÇÏ¿´½À´Ï´Ù. ¢¾¢¾¢¾");
-					System.out.println("³» ÀÜ¿© Æ÷ÀÎÆ® : " + userPoint + "¿ø");
-					// ÁÖ¹® °¡´É½Ã ÁÖ¹® ¸ñ·Ï¿¡µµ ÇØ´ç »ç¿ëÀÚÀÇ ÀÌ¸§À¸·Î ÁÖ¹® Á¤º¸ Ãß°¡
+					System.out.println("â™¥â™¥â™¥ ì£¼ë¬¸ì„ ì™„ë£Œí•˜ì˜€ìŠµë‹ˆë‹¤. â™¥â™¥â™¥");
+					System.out.println("ë‚´ ì”ì—¬ í¬ì¸íŠ¸ : " + userPoint + "ì›");
+					// ì£¼ë¬¸ ê°€ëŠ¥ì‹œ ì£¼ë¬¸ ëª©ë¡ì—ë„ í•´ë‹¹ ì‚¬ìš©ìì˜ ì´ë¦„ìœ¼ë¡œ ì£¼ë¬¸ ì •ë³´ ì¶”ê°€
 					try {
 						pstm = conn.prepareStatement(addOrderList_sql);
 						pstm.setString(1, userId);
 						pstm.setInt(2, selectProdNum);
 						pstm.setString(3, result);
 						pstm.executeUpdate();
-						System.out.println("ÁÖ¹®¿Ï·áµÇ¾ú½À´Ï´Ù.");
+						System.out.println("ì£¼ë¬¸ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.");
 					} catch (SQLException e) {
 						System.out.println(e);
 					} finally {
@@ -139,7 +139,7 @@ public class ProdDAO {
 						}
 					}
 				} else {
-					System.out.println("ÀÜ¾×ÀÌ ºÎÁ·ÇÕ´Ï´Ù. ÃæÀü ÈÄ ÀÌ¿ëÇØÁÖ¼¼¿ä.");
+					System.out.println("ì”ì•¡ì´ ë¶€ì¡±í•©ë‹ˆë‹¤. ì¶©ì „ í›„ ì´ìš©í•´ì£¼ì„¸ìš”.");
 				}
 			}
 
@@ -158,14 +158,14 @@ public class ProdDAO {
 		Random r = new Random();
 		int num = r.nextInt(2) + 1;
 		if (num == 1)
-			return "»óÇ°ÁØºñÁß";
+			return "ìƒí’ˆì¤€ë¹„ì¤‘";
 		else if (num == 2)
-			return "¹è¼ÛÁß";
+			return "ë°°ì†¡ì¤‘";
 		else
-			return "¹è¼Û¿Ï·á";
+			return "ë°°ì†¡ì™„ë£Œ";
 	}
 	
-	// -------------------------ÁÖ¹® ¸ñ·Ï º¸¿©ÁÖ±â---------------------------	
+	// -------------------------ì£¼ë¬¸ ëª©ë¡ ë³´ì—¬ì£¼ê¸°---------------------------	
 	public void showOrderList(String userId) {
 		String sql = "SELECT * FROM TBL_ORDERLIST where userid = ?";
 		
@@ -174,7 +174,7 @@ public class ProdDAO {
 			pstm.setString(1, userId);
 			rs = pstm.executeQuery();
 			while (rs.next()) {
-				System.out.println("ÁÖ¹®¹øÈ£ : "+rs.getInt(1)+" / »óÇ°¹øÈ£ : "+rs.getInt(3)+" / ¹è¼Û»óÅÂ : "+rs.getString(4));
+				System.out.println("ì£¼ë¬¸ë²ˆí˜¸ : "+rs.getInt(1)+" / ìƒí’ˆë²ˆí˜¸ : "+rs.getInt(3)+" / ë°°ì†¡ìƒíƒœ : "+rs.getString(4));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -183,12 +183,12 @@ public class ProdDAO {
 				rs.close();
 				pstm.close();
 			} catch (SQLException e) {
-				System.out.println("ÁÖ¹® ¸®½ºÆ® ºÒ·¯¿À±â¿¡ ½ÇÆĞÇÏ¿´½À´Ï´Ù");
+				System.out.println("ì£¼ë¬¸ ë¦¬ìŠ¤íŠ¸ ë¶ˆëŸ¬ì˜¤ê¸°ì— ì‹¤íŒ¨í•˜ì˜€ìŠµë‹ˆë‹¤");
 			}
 		}
 	}
 
-	// -------------------------Àå¹Ù±¸´Ï---------------------------
+	// -------------------------ì¥ë°”êµ¬ë‹ˆ---------------------------
 	public void addBasket(String userid, int selectProdNum) {
 		String basket_sql = "INSERT INTO TBL_BASKET VALUES(SEQ_BASKET.NEXTVAL,?,?)";
 		
@@ -198,7 +198,7 @@ public class ProdDAO {
 			pstm.setInt(2, selectProdNum);
 			rs = pstm.executeQuery();
 			
-			System.out.println(selectProdNum+"¹ø »óÇ°À» Àå¹Ù±¸´Ï¿¡ ´ã¾Ò½À´Ï´Ù.");
+			System.out.println(selectProdNum+"ë²ˆ ìƒí’ˆì„ ì¥ë°”êµ¬ë‹ˆì— ë‹´ì•˜ìŠµë‹ˆë‹¤.");
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -208,12 +208,12 @@ public class ProdDAO {
 				rs.close();
 				pstm.close();
 			} catch (SQLException e) {
-				System.out.println("»óÇ°À» Àå¹Ù±¸´Ï¿¡ Ãß°¡ÇÏÁö ¸øÇß½À´Ï´Ù. ´Ù½Ã ½ÃµµÇØÁÖ¼¼¿ä.");
+				System.out.println("ìƒí’ˆì„ ì¥ë°”êµ¬ë‹ˆì— ì¶”ê°€í•˜ì§€ ëª»í–ˆìŠµë‹ˆë‹¤. ë‹¤ì‹œ ì‹œë„í•´ì£¼ì„¸ìš”.");
 			}
 		}
 		
 	}
-	//-------------------------Àå¹Ù±¸´Ï º¸±â---------------------------
+	//-------------------------ì¥ë°”êµ¬ë‹ˆ ë³´ê¸°---------------------------
 	public ArrayList<BasketDTO> showBasketList(String userid) {
 		String showBasketList_sql = "SELECT b.*,p.PRODNAME, p.prodprice FROM TBL_BASKET b "
 				+ "INNER JOIN TBL_PRODUCT p ON b.PRODIDX = p.PRODIDX WHERE b.USERID=? ORDER BY BASKETIDX";
@@ -222,24 +222,24 @@ public class ProdDAO {
 				pstm=conn.prepareStatement(showBasketList_sql);
 				pstm.setString(1,userid);
 				rs = pstm.executeQuery();
-				System.out.println("-------"+userid+"´ÔÀÇ Àå¹Ù±¸´Ï ¸ñ·Ï-------");
+				System.out.println("-------"+userid+"ë‹˜ì˜ ì¥ë°”êµ¬ë‹ˆ ëª©ë¡-------");
 				while (rs.next()) {
 					basketlist.add(new BasketDTO(rs.getInt(1),rs.getString(2),rs.getInt(3),rs.getString(4),rs.getInt(5)));
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
-				System.out.println("Àå¹Ù±¸´Ï Á¶È¸¿¡ ½ÇÆĞÇß½À´Ï´Ù.");
+				System.out.println("ì¥ë°”êµ¬ë‹ˆ ì¡°íšŒì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.");
 			}finally {
 				try {
 					rs.close();
 					pstm.close();
 				} catch (SQLException e) {
-					System.out.println("¸ñ·ÏÀ» ºÒ·¯¿ÀÁö ¸øÇÏ¿´½À´Ï´Ù.");
+					System.out.println("ëª©ë¡ì„ ë¶ˆëŸ¬ì˜¤ì§€ ëª»í•˜ì˜€ìŠµë‹ˆë‹¤.");
 				}
 			}
 			return basketlist;
 	}
-	//-------------------------Àå¹Ù±¸´Ï »èÁ¦---------------------------
+	//-------------------------ì¥ë°”êµ¬ë‹ˆ ì‚­ì œ---------------------------
 	public void delBasketList(int choiceBasketlist) {
 		String delBasketList_sql = "DELETE FROM tbl_basket WHERE basketidx = ?";
 		try {
@@ -247,18 +247,18 @@ public class ProdDAO {
 			pstm.setInt(1, choiceBasketlist);
 			pstm.executeUpdate();
 		} catch (SQLException e) {
-			System.out.println("delBasketList : Äõ¸®Àü¼Û ½ÇÆĞ");
+			System.out.println("delBasketList : ì¿¼ë¦¬ì „ì†¡ ì‹¤íŒ¨");
 		} finally {
 			try {
 				pstm.close();
 			} catch (SQLException e) {
-				System.out.println("delBasketList : pstm ´İ±â ¿À·ù");
+				System.out.println("delBasketList : pstm ë‹«ê¸° ì˜¤ë¥˜");
 			}
 		}
 	}
-	// -------------------------ÁÁ¾Æ¿ä---------------------------
+	// -------------------------ì¢‹ì•„ìš”---------------------------
 	public int likeAdd(int prodIdx) {
-		// ÇØ´ç »óÇ° Á¤º¸ÀÇ prodLike¸¦ 1¾¿ Ãß°¡ÇÏ¿© ¾÷µ¥ÀÌÆ®ÇÕ´Ï´Ù.
+		// í•´ë‹¹ ìƒí’ˆ ì •ë³´ì˜ prodLikeë¥¼ 1ì”© ì¶”ê°€í•˜ì—¬ ì—…ë°ì´íŠ¸í•©ë‹ˆë‹¤.
 		String sql = "UPDATE TBL_PRODUCT SET PRODLIKE=PRODLIKE+1 WHERE PRODIDX=?";
 		int result = 0;
 		try {
@@ -267,13 +267,13 @@ public class ProdDAO {
 			result = pstm.executeUpdate();
 
 		} catch (SQLException e) {
-			System.out.println("¾Ë ¼ö ¾ø´Â ¿À·ù.likeresult");
+			System.out.println("ì•Œ ìˆ˜ ì—†ëŠ” ì˜¤ë¥˜.likeresult");
 			e.printStackTrace();
 		} finally {
 			try {
 				pstm.close();
 			} catch (SQLException e) {
-				System.out.println("¾Ë ¼ö ¾ø´Â ¿À·ù.likepstm");
+				System.out.println("ì•Œ ìˆ˜ ì—†ëŠ” ì˜¤ë¥˜.likepstm");
 				e.printStackTrace();
 			}
 		}

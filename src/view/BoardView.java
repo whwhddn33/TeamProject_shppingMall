@@ -12,10 +12,10 @@ public class BoardView {
 
 	public BoardView() {
 		while (true) {
-			System.out.println("=== °Ô½ÃÆÇ ===");
+			System.out.println("=== ê²Œì‹œíŒ ===");
 			bdao.boardAllList();
 			System.out.println("==========");
-			System.out.println("1. °Ô½Ã±Û ÀÛ¼ºÇÏ±â \n2. ³»°¡ ¿Ã¸° ±Û(¼öÁ¤,»èÁ¦) \n3. °Ô½Ã±Û ÀÚ¼¼È÷ º¸±â \n4. ³ª°¡±â");
+			System.out.println("1. ê²Œì‹œê¸€ ì‘ì„±í•˜ê¸° \n2. ë‚´ê°€ ì˜¬ë¦° ê¸€(ìˆ˜ì •,ì‚­ì œ) \n3. ê²Œì‹œê¸€ ìì„¸íˆ ë³´ê¸° \n4. ë‚˜ê°€ê¸°");
 			int choice = sc.nextInt();
 			if (choice == 4) {
 				break;
@@ -23,38 +23,38 @@ public class BoardView {
 			if (Session.get("session_id") != null) {
 				switch (choice) {
 				case 1:
-					System.out.print("Á¦¸ñ : ");
+					System.out.print("ì œëª© : ");
 					String title = sc.next();
-					System.out.print("³»¿ë : ");
+					System.out.print("ë‚´ìš© : ");
 					sc.nextLine();
 					String content = sc.nextLine();
 					BoardDTO newBoard = new BoardDTO(Session.get("session_id"), title, content);
 					int result = bdao.boardWrite(newBoard);
 					if (result == 0) {
-						System.out.println("½ÇÆĞ");
+						System.out.println("ì‹¤íŒ¨");
 					} else {
-						System.out.println("°Ô½Ã±Û ÀÛ¼ºÀ» ¿Ï·áÇÏ¿´½À´Ï´Ù.");
+						System.out.println("ê²Œì‹œê¸€ ì‘ì„±ì„ ì™„ë£Œí•˜ì˜€ìŠµë‹ˆë‹¤.");
 					}
 					break;
 				case 2:
 					bdao.myBoardList();
-					System.out.println("°Ô½Ã±ÛÀ» ¼±ÅÃÇÏ¿© [¼öÁ¤ÇÏ±â/»èÁ¦ÇÏ±â] ±â´ÉÀ» ÀÌ¿ëÇÏ¼¼¿ä!");
-					System.out.print("°Ô½Ã±Û ¼±ÅÃ(³ª°¡±â0) : ");
+					System.out.println("ê²Œì‹œê¸€ì„ ì„ íƒí•˜ì—¬ [ìˆ˜ì •í•˜ê¸°/ì‚­ì œí•˜ê¸°] ê¸°ëŠ¥ì„ ì´ìš©í•˜ì„¸ìš”!");
+					System.out.print("ê²Œì‹œê¸€ ì„ íƒ(ë‚˜ê°€ê¸°0) : ");
 					int boardChoice = sc.nextInt();
 					if (boardChoice == 0) {
 						break;
 					}
-					System.out.print("1.¼öÁ¤ÇÏ±â 2.»èÁ¦ÇÏ±â");
+					System.out.print("1.ìˆ˜ì •í•˜ê¸° 2.ì‚­ì œí•˜ê¸°");
 					int actChoice = sc.nextInt();
 					if(actChoice == 1) {
-						System.out.print("¼öÁ¤ÇÒ Ç×¸ñÀ» ¼±ÅÃÇØÁÖ¼¼¿ä [1.Á¦¸ñ 2.ÄÜÅÙÃ÷]");
+						System.out.print("ìˆ˜ì •í•  í•­ëª©ì„ ì„ íƒí•´ì£¼ì„¸ìš” [1.ì œëª© 2.ì½˜í…ì¸ ]");
 						int modiAns = sc.nextInt();
-						System.out.println("¼öÁ¤ÇÒ ³»¿ëÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä : ");
+						System.out.println("ìˆ˜ì •í•  ë‚´ìš©ì„ ì…ë ¥í•´ì£¼ì„¸ìš” : ");
 						sc.nextLine();
 						String newData = sc.nextLine();		
 						bdao.boardModify(boardChoice, modiAns, newData);
 					}else if(actChoice == 2) {
-						System.out.println("Á¤¸» »èÁ¦ÇÏ½Ã°Ú½À´Ï±î?[Y/N]");
+						System.out.println("ì •ë§ ì‚­ì œí•˜ì‹œê² ìŠµë‹ˆê¹Œ?[Y/N]");
 						String delAns = sc.next();
 						if(delAns.equals("Y")) {
 							bdao.boardDel(boardChoice);
@@ -62,13 +62,13 @@ public class BoardView {
 					}
 					break;
 				case 3:
-					System.out.println("³»¿ëÀ» È®ÀÎ ÇÒ °Ô½Ã±ÛÀ» ¼±ÅÃÇØÁÖ¼¼¿ä.");
+					System.out.println("ë‚´ìš©ì„ í™•ì¸ í•  ê²Œì‹œê¸€ì„ ì„ íƒí•´ì£¼ì„¸ìš”.");
 					int readChoice = sc.nextInt();
 					bdao.readBoard(readChoice);
 					break;
 				}
 			} else {
-				System.out.println("·Î±×ÀÎÀ» ÇØÁÖ¼¼¿ä.");
+				System.out.println("ë¡œê·¸ì¸ì„ í•´ì£¼ì„¸ìš”.");
 			}
 		}
 	}

@@ -17,14 +17,14 @@ public class BoardDAO {
 		conn = DBConnection.getConnection();
 	}
 
-	// ----------------°Ô½ÃÆÇ ÀüÃ¼º¸±â
+	// ----------------ê²Œì‹œíŒ ì „ì²´ë³´ê¸°
 	public void boardAllList() {
 		String allList_sql = "SELECT * FROM TBL_BOARD";
 		try {
 			pstm = conn.prepareStatement(allList_sql);
 			rs = pstm.executeQuery();
 			while (rs.next()) {
-				System.out.println("¹øÈ£ (" + rs.getInt(1) + ") / Á¦¸ñ : " + rs.getString(3) + " / °Ô½ÃÀÏ " + rs.getDate(5));
+				System.out.println("ë²ˆí˜¸ (" + rs.getInt(1) + ") / ì œëª© : " + rs.getString(3) + " / ê²Œì‹œì¼ " + rs.getDate(5));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -33,12 +33,12 @@ public class BoardDAO {
 				rs.close();
 				pstm.close();
 			} catch (SQLException e) {
-				System.out.println("°Ô½ÃÆÇ ¸®½ºÆ® ºÒ·¯¿À±â¿¡ ½ÇÆĞÇÏ¿´½À´Ï´Ù");
+				System.out.println("ê²Œì‹œíŒ ë¦¬ìŠ¤íŠ¸ ë¶ˆëŸ¬ì˜¤ê¸°ì— ì‹¤íŒ¨í•˜ì˜€ìŠµë‹ˆë‹¤");
 			}
 		}
 	}
 
-	// ----------------°Ô½Ã±Û ÀÛ¼ºÇÏ±â
+	// ----------------ê²Œì‹œê¸€ ì‘ì„±í•˜ê¸°
 	public int boardWrite(BoardDTO newBoard) {
 		String write_sql = "INSERT INTO TBL_BOARD(BOARDIDX,USERID,BOARDTITLE,BOARDCONTENTS)\r\n"
 				+ "VALUES(SEQ_BOARD.NEXTVAL,?,?,?)";
@@ -55,13 +55,13 @@ public class BoardDAO {
 			try {
 				pstm.close();
 			} catch (SQLException e) {
-				System.out.println("¿À·ù ¹ß»ı");
+				System.out.println("ì˜¤ë¥˜ ë°œìƒ");
 			}
 		}
 		return check;
 	}
 
-	// ----------------³»°¡ ¿Ã¸° ±Û È®ÀÎÇÏ±â
+	// ----------------ë‚´ê°€ ì˜¬ë¦° ê¸€ í™•ì¸í•˜ê¸°
 	public void myBoardList() {
 		String myList_sql = "SELECT * FROM TBL_BOARD WHERE USERID = ?";
 		try {
@@ -70,7 +70,7 @@ public class BoardDAO {
 			rs = pstm.executeQuery();
 
 			while (rs.next()) {
-				System.out.println("¹øÈ£ (" + rs.getInt(1) + ") / Á¦¸ñ : " + rs.getString(3) + " / °Ô½ÃÀÏ " + rs.getDate(5));
+				System.out.println("ë²ˆí˜¸ (" + rs.getInt(1) + ") / ì œëª© : " + rs.getString(3) + " / ê²Œì‹œì¼ " + rs.getDate(5));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -79,13 +79,13 @@ public class BoardDAO {
 				rs.close();
 				pstm.close();
 			} catch (SQLException e) {
-				System.out.println("¿À·ù ¹ß»ı");
+				System.out.println("ì˜¤ë¥˜ ë°œìƒ");
 			}
 		}
 
 	}
 
-	// ----------------³» °Ô½Ã±Û ¼öÁ¤ÇÏ±â
+	// ----------------ë‚´ ê²Œì‹œê¸€ ìˆ˜ì •í•˜ê¸°
 	public void boardModify(int boardChoice, int modiAns, String newData) {
 		String modify_sql;
 
@@ -94,7 +94,7 @@ public class BoardDAO {
 		} else if (modiAns == 2) {
 			modify_sql = "UPDATE TBL_BOARD SET BOARDCONTENTS=? WHERE BOARDIDX = ?";
 		} else {
-			System.out.println("Àß¸ø ÀÔ·ÂÇÏ¼Ì½À´Ï´Ù");
+			System.out.println("ì˜ëª» ì…ë ¥í•˜ì…¨ìŠµë‹ˆë‹¤");
 			return;
 		}
 		try {
@@ -108,13 +108,13 @@ public class BoardDAO {
 			try {
 				pstm.close();
 			} catch (SQLException e) {
-				System.out.println("¾Ë ¼ö ¾ø´Â ¿À·ù");
+				System.out.println("ì•Œ ìˆ˜ ì—†ëŠ” ì˜¤ë¥˜");
 			}
 		}
 
 	}
 
-	// ----------------³» °Ô½Ã±Û »èÁ¦ÇÏ±â
+	// ----------------ë‚´ ê²Œì‹œê¸€ ì‚­ì œí•˜ê¸°
 	public void boardDel(int boardChoice) {
 		String del_sql;
 		del_sql = "DELETE FROM TBL_BOARD WHERE BOARDIDX = ?";
@@ -128,13 +128,13 @@ public class BoardDAO {
 			try {
 				pstm.close();
 			} catch (SQLException e) {
-				System.out.println("¾Ë ¼ö ¾ø´Â ¿À·ù");
+				System.out.println("ì•Œ ìˆ˜ ì—†ëŠ” ì˜¤ë¥˜");
 			}
 		}
 
 	}
 
-	// ----------------³» °Ô½Ã±Û ÀÚ¼¼È÷º¸±â
+	// ----------------ë‚´ ê²Œì‹œê¸€ ìì„¸íˆë³´ê¸°
 	public void readBoard(int readChoice) {
 		String read_sql = "SELECT * FROM TBL_BOARD WHERE BOARDIDX = ?";
 		try {
@@ -142,8 +142,8 @@ public class BoardDAO {
 			pstm.setInt(1, readChoice);
 			rs = pstm.executeQuery();
 			if (rs.next()) {
-				System.out.println("¹øÈ£ (" + rs.getInt(1) + ") / Á¦¸ñ : " + rs.getString(3) + "³»¿ë : " + rs.getString(3)
-						+ " / °Ô½ÃÀÏ " + rs.getDate(5));
+				System.out.println("ë²ˆí˜¸ (" + rs.getInt(1) + ") / ì œëª© : " + rs.getString(3) + "ë‚´ìš© : " + rs.getString(3)
+						+ " / ê²Œì‹œì¼ " + rs.getDate(5));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -152,7 +152,7 @@ public class BoardDAO {
 				rs.close();
 				pstm.close();
 			} catch (SQLException e) {
-				System.out.println("°Ô½ÃÆÇ ¸®½ºÆ® ºÒ·¯¿À±â¿¡ ½ÇÆĞÇÏ¿´½À´Ï´Ù");
+				System.out.println("ê²Œì‹œíŒ ë¦¬ìŠ¤íŠ¸ ë¶ˆëŸ¬ì˜¤ê¸°ì— ì‹¤íŒ¨í•˜ì˜€ìŠµë‹ˆë‹¤");
 			}
 		}
 	}

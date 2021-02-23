@@ -1,13 +1,13 @@
 package dto;
 
 public class UserDTO {
-	private int userIdx; // È¸¿ø °íÀ¯¹øÈ£(PK)
-	private String userId; // ¾ÆÀÌµğ(FK)
-	private String userPw; // ºñ¹Ğ¹øÈ£
-	private String userName; // ÀÌ¸§(FK)
-	private String userPhone; // Æù¹øÈ£
-	private String userAddr; // ÁÖ¼Ò(FK)
-	private int userPoint; // À¯ÀúÀÜ¾×(FK)
+	private int userIdx; // íšŒì› ê³ ìœ ë²ˆí˜¸(PK)
+	private String userId; // ì•„ì´ë””(FK)
+	private String userPw; // ë¹„ë°€ë²ˆí˜¸
+	private String userName; // ì´ë¦„(FK)
+	private String userPhone; // í°ë²ˆí˜¸
+	private String userAddr; // ì£¼ì†Œ(FK)
+	private int userPoint; // ìœ ì €ì”ì•¡(FK)
 
 	public int getUserIdx() {
 		return userIdx;

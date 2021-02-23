@@ -1,11 +1,11 @@
 package dto;
 
 public class BasketDTO {
-	private int basketIdx; // Àå¹Ù±¸´Ï °íÀ¯¹øÈ£(PK)
-	private String userId; // È¸¿ø¾ÆÀÌµğ(FK)
-	private int prodIdx; // »óÇ°°íÀ¯¹øÈ£(FK)
-	private String prodName; // »óÇ°ÀÌ¸§(FK)
-	private int pordprice; // °¡°İ
+	private int basketIdx; // ì¥ë°”êµ¬ë‹ˆ ê³ ìœ ë²ˆí˜¸(PK)
+	private String userId; // íšŒì›ì•„ì´ë””(FK)
+	private int prodIdx; // ìƒí’ˆê³ ìœ ë²ˆí˜¸(FK)
+	private String prodName; // ìƒí’ˆì´ë¦„(FK)
+	private int pordprice; // ê°€ê²©
 	
 	public BasketDTO() {}
 	
@@ -50,6 +50,6 @@ public class BasketDTO {
 
 	@Override
 	public String toString() {
-		return "Àå¹Ù±¸´Ï¹øÈ£ : "+basketIdx+" / »óÇ°¹øÈ£ : "+prodIdx+" / »óÇ°¸í : "+prodName+" / °¡°İ : "+pordprice;
+		return "ì¥ë°”êµ¬ë‹ˆë²ˆí˜¸ : "+basketIdx+" / ìƒí’ˆë²ˆí˜¸ : "+prodIdx+" / ìƒí’ˆëª… : "+prodName+" / ê°€ê²© : "+pordprice;
 	}
 }

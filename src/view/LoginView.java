@@ -11,14 +11,14 @@ public class LoginView {
 		Scanner sc = new Scanner(System.in);
 		UserDAO udao = new UserDAO();
 
-		System.out.print("¾ÆÀÌµğ : ");
+		System.out.print("ì•„ì´ë”” : ");
 		String userId = sc.next();
-		System.out.print("ºñ¹Ğ¹øÈ£ : ");
+		System.out.print("ë¹„ë°€ë²ˆí˜¸ : ");
 		String userPw = sc.next();
 
-		UserDTO session = udao.login(userId, userPw); // ·Î±×ÀÎÇÏ·Á´Â È¸¿øÁ¤º¸¸¦ sessionÀÌ¶ó´Â º¯¼ö¿¡ ¿Å°Ü´ã½¿´Ï´Ù.
+		UserDTO session = udao.login(userId, userPw); // ë¡œê·¸ì¸í•˜ë ¤ëŠ” íšŒì›ì •ë³´ë¥¼ sessionì´ë¼ëŠ” ë³€ìˆ˜ì— ì˜®ê²¨ë‹´ìŠ´ë‹ˆë‹¤.
 		if (session == null) {
-			System.out.println("·Î±×ÀÎ ½ÇÆĞ");
+			System.out.println("ë¡œê·¸ì¸ ì‹¤íŒ¨");
 		} else {
 			Session.put("session_id", session.getUserId());
 			new Main();

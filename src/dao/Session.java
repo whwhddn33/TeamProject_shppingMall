@@ -3,10 +3,10 @@ package dao;
 import java.util.HashMap;
 
 public class Session {
-	//¼¼¼Ç¿¡ ÀúÀåÇÒ Á¤º¸µéÀÌ key-value Çü½ÄÀ¸·Î ÀúÀåµÉ HashMapÀ» ¼¼¼ÇÀ¸·Î ÀÌ¿ëÇÑ´Ù.
+	//ì„¸ì…˜ì— ì €ì¥í•  ì •ë³´ë“¤ì´ key-value í˜•ì‹ìœ¼ë¡œ ì €ì¥ë  HashMapì„ ì„¸ì…˜ìœ¼ë¡œ ì´ìš©í•œë‹¤.
 	private static HashMap<String, String> session = new HashMap<>();
 	
-	//½ºÅÂÆ½ ¸Ş¼Òµåµé·Î ¼¼ÆÃÇÏ°í °ªÀ» °¡Á®¿Â´Ù.
+	//ìŠ¤íƒœí‹± ë©”ì†Œë“œë“¤ë¡œ ì„¸íŒ…í•˜ê³  ê°’ì„ ê°€ì ¸ì˜¨ë‹¤.
 	public static void put(String key,String value) {
 		session.put(key, value);
 	}

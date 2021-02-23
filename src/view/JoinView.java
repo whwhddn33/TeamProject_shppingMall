@@ -11,31 +11,31 @@ public class JoinView {
 		Scanner sc = new Scanner(System.in);
 		UserDAO udao = new UserDAO();
 
-		System.out.print("¾ÆÀÌµğ : ");
+		System.out.print("ì•„ì´ë”” : ");
 		String userId = sc.next();
-		if (!udao.checkDup(userId)) { // ¾ÆÀÌµğ ÀÔ·Â°ú µ¿½Ã¿¡ Áßº¹ ¾ÆÀÌµğ°Ë»ç¸¦ ÁøÇàÇÕ´Ï´Ù.
-			System.out.println("Áßº¹µÈ ¾ÆÀÌµğ°¡ ÀÖ½À´Ï´Ù. ´Ù½Ã ½ÃµµÇØ ÁÖ¼¼¿ä.");
+		if (!udao.checkDup(userId)) { // ì•„ì´ë”” ì…ë ¥ê³¼ ë™ì‹œì— ì¤‘ë³µ ì•„ì´ë””ê²€ì‚¬ë¥¼ ì§„í–‰í•©ë‹ˆë‹¤.
+			System.out.println("ì¤‘ë³µëœ ì•„ì´ë””ê°€ ìˆìŠµë‹ˆë‹¤. ë‹¤ì‹œ ì‹œë„í•´ ì£¼ì„¸ìš”.");
 			new Index();
 		} else {
-			System.out.print("ºñ¹Ğ¹øÈ£(8ÀÚ¸® ÀÌ»ó) : ");
+			System.out.print("ë¹„ë°€ë²ˆí˜¸(8ìë¦¬ ì´ìƒ) : ");
 			String userPw = sc.next();
-			System.out.print("ÀÌ¸§ : ");
+			System.out.print("ì´ë¦„ : ");
 			String userName = sc.next();
-			System.out.print("ÇÚµåÆù¹øÈ£ : ");
+			System.out.print("í•¸ë“œí°ë²ˆí˜¸ : ");
 			String userPhone = sc.next();
-			System.out.print("ÁÖ¼Ò : ");
+			System.out.print("ì£¼ì†Œ : ");
 			sc.nextLine();
 			String userAddr = sc.nextLine();
 			UserDTO newUser = new UserDTO(userId, userPw, userName, userPhone, userAddr);
 
-			int result = udao.join(newUser); // ÀÔ·ÂÇÑ Á¤º¸¸¦ È¸¿ø°¡ÀÔ ¸Ş¼Òµå¿¡ VOÇüÅÂ·Î Àü´ŞÇØÁİ´Ï´Ù.
+			int result = udao.join(newUser); // ì…ë ¥í•œ ì •ë³´ë¥¼ íšŒì›ê°€ì… ë©”ì†Œë“œì— VOí˜•íƒœë¡œ ì „ë‹¬í•´ì¤ë‹ˆë‹¤.
 			if (result == -1) {
-				System.out.println("ºñ¹Ğ¹øÈ£¸¦ ´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä.");
+				System.out.println("ë¹„ë°€ë²ˆí˜¸ë¥¼ ë‹¤ì‹œ ì…ë ¥í•´ì£¼ì„¸ìš”.");
 			} else if (result == 0) {
-				System.out.println("È¸¿ø°¡ÀÔ ¿À·ù ¹ß»ı!");
+				System.out.println("íšŒì›ê°€ì… ì˜¤ë¥˜ ë°œìƒ!");
 			} else {
-				System.out.println("È¸¿ø°¡ÀÔ ¼º°ø!");
-				System.out.println(userId + "´Ô °¡ÀÔÀ» È¯¿µÇÕ´Ï´Ù.");
+				System.out.println("íšŒì›ê°€ì… ì„±ê³µ!");
+				System.out.println(userId + "ë‹˜ ê°€ì…ì„ í™˜ì˜í•©ë‹ˆë‹¤.");
 			}
 		}
 

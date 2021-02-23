@@ -11,12 +11,12 @@ public class Main {
 		while (true) {
 			if (Session.get("session_id") != null) {
 
-				System.out.println("=== 1¼®2Á¶ ¼îÇÎ¸ô(Main) ===");
-				System.out.println("1. »óÇ°º¸±â \n2. ³» Á¤º¸  \n3. °Ô½ÃÆÇ \n4. ·Î±×¾Æ¿ô");
+				System.out.println("=== 1ì„2ì¡° ì‡¼í•‘ëª°(Main) ===");
+				System.out.println("1. ìƒí’ˆë³´ê¸° \n2. ë‚´ ì •ë³´  \n3. ê²Œì‹œíŒ \n4. ë¡œê·¸ì•„ì›ƒ");
 				int choice = sc.nextInt();
 				if (choice == 4) {
 					Session.put("session_id", null);
-					System.out.println("·Î±×¾Æ¿ôÀÌ ¿Ï·áµÇ¾ú½À´Ï´Ù.");
+					System.out.println("ë¡œê·¸ì•„ì›ƒì´ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.");
 					break;
 				}
 
