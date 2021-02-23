@@ -111,7 +111,6 @@ public class BoardDAO {
 				System.out.println("알 수 없는 오류");
 			}
 		}
-
 	}
 
 	// ----------------내 게시글 삭제하기
@@ -131,7 +130,6 @@ public class BoardDAO {
 				System.out.println("알 수 없는 오류");
 			}
 		}
-
 	}
 
 	// ----------------내 게시글 자세히보기
